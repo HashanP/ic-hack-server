@@ -60,7 +60,8 @@ var app = express();
 
 app.use(bodyParser.json());
 
-var id = {};
+var id = {}; 
+
 
 uPSongs.hasMany(userPlaylists, {foreignKey: 'userPlaylistID'});
 uPSongs.hasMany(songs, {foreignKey: 'songID'});
@@ -90,6 +91,13 @@ app.post("/check", function(req, res){
   console.log(req.body);      
   var id2 = req.body.id;
   res.send(id2 in id);
+});
+
+app.post("/upload", function(req, res){
+  console.log(req.body);
+  var id2 = req.body.id;
+  res.send({completed: true});
+  id[id2] = req.body.playlists;
 });
 
 app.listen(3000);
