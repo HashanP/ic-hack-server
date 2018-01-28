@@ -1,5 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser');
+const Sequelize = require('sequelize');
+
+const sequelize = new Sequelize("MusiqueDB", null, null, {
+  dialect: "sqlite",
+  
+  // SQLite only
+  storage: './database.sqlite'
+});
 
 var app = express();
 
