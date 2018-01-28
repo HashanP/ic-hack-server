@@ -1,18 +1,16 @@
-const express = require("express")
-const app = express()
-const bodyParser = require("body-parser");
+const express = require('express')
+const bodyParser = require('body-parser');
 
-app.use(bodyParser.json({ type: "application/*+json" }))
+var app = express();
+
+app.use(bodyParser.json());
 
 var id = {};
 
-app.get("/check", function(req, res) {
+app.post("/check", function(req, res){
+  console.log(req.body);      
   var id2 = req.body.id;
-  var t = id2 in id;
-  if (!t) {
-    id[id2] = true;
-  }
-  res.send({"response":t});
+  res.send(id2 in id);
 });
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3000);
