@@ -62,6 +62,10 @@ app.use(bodyParser.json());
 
 var id = {}; 
 
+var groups = {
+  "bbb":["htr"],
+  "ccc":["htr"]
+};
 
 uPSongs.hasMany(userPlaylists, {foreignKey: 'userPlaylistID'});
 uPSongs.hasMany(songs, {foreignKey: 'songID'});
@@ -99,6 +103,50 @@ app.post("/upload", function(req, res){
   res.send({completed: true});
   id[id2] = req.body.playlists;
 });
+
+
+app.post("/join", function(req, res) {
+  console.log(req.body);
+  var username = req.body.username;
+  var group = req.body.group;
+  if (group in groups) {
+    if (!groups[group].contains(username)) {
+      groups[group].push(username);
+    }
+    res.send({response:true});
+  } else {
+    res.send({response:false});
+  }
+  console.log(groups);
+  //superAdvancedSelectionAlgorithm(group);
+});
+
+var i = 0;
+var getRandom = function() {
+  return "b" + i;
+  i++;
+}
+
+app.post("/list", function(req, res) {
+  var all = [];
+  for (var g in groups) {
+    if (groups[g].contains(req.body.username)) {
+      all.push(g);
+    }
+  }
+  res.send({response: true, all: all});
+});
+
+app.post("/create", function(req, res) {
+  console.log(req.body);
+  var username = req.body.username;
+  var str = getRandom();
+  groups[str] = [username]
+  res.send({response:true, name: str});
+  console.log(req.body);
+//  superAdvancedSelectionAlgorithm(str);
+});
+
 
 app.listen(3000);
 
