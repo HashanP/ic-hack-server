@@ -90,7 +90,7 @@ songs.findAll({
 app.post("/check", function(req, res){
   console.log(req.body);      
   var id2 = req.body.id;
-  res.send(id2 in id);
+  res.send({response:id2 in id});
 });
 
 app.post("/upload", function(req, res){
