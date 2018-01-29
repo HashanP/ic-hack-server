@@ -110,7 +110,7 @@ app.post("/check", function(req, res){
 app.post("/upload", function(req, res){
   console.log(req.body);
   var id2 = req.body.id;
-  res.send({completed: true});
+  res.send({response: true});
   id[id2] = req.body.playlists;
 });
 
