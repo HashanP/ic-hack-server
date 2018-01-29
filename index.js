@@ -2,6 +2,16 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
 
+Array.prototype.contains = function (element) {
+  for (var i = 0; i < this.length; i++) {
+      if (this[i] == element) {
+          return true;
+      }
+  }
+
+  return false;
+};
+
 const sequelize = new Sequelize("MusiqueDB", null, null, {
   dialect: "sqlite",
 
